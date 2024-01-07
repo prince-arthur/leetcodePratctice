@@ -4,12 +4,11 @@ class Solution {
 		Set<Integer> set = new HashSet<>();
 		for(int num:nums) {
 			if(set.contains(num)) {
-				result = true;
-				break;
+				return true;
 			} else {
 				set.add(num);
 			}
 		}
-		return result;
+        return false;
 	}
 }
