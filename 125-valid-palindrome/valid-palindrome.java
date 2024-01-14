@@ -3,16 +3,15 @@ class Solution {
         char[] x = s.toCharArray();
 		int i=0, j=s.length()-1;
 		while(i<j) {
-			char start = x[i], end = x[j];
-			if(!Character.isLetterOrDigit(start)) {
+			if(!Character.isLetterOrDigit(x[i])) {
 				i++;
 				continue;
 			}
-			if(!Character.isLetterOrDigit(end)) {
+			if(!Character.isLetterOrDigit(x[j])) {
 				j--;
 				continue;
 			} 
-			if(Character.toLowerCase(start) != Character.toLowerCase(end)) {
+			if(Character.toLowerCase(x[i]) != Character.toLowerCase(x[j])) {
 				return false;
 			}
 			
