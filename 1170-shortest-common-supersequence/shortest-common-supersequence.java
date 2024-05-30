@@ -3,7 +3,8 @@ class Solution {
         char[] x = str1.toCharArray(), y = str2.toCharArray();
         int m = x.length, n = y.length;
         int[][] cache = new int[m+1][n+1];
-        for(int r[]:cache) Arrays.fill(r,0);
+        for(int i=0; i<m+1; i++) cache[i][0] = 0;
+        for(int i=0; i<n+1; i++) cache[0][i] = 0;
         for(int i=1; i<m+1; i++){
             for(int j=1; j<n+1; j++){
                 if(x[i-1] == y[j-1]){
