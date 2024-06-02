@@ -1,42 +1,33 @@
 class Solution {
-    static int[][] cache = new int[2001][2001];
+    boolean isPalindrome(String s,int start,int end){
+		while(start<end){
+			if(s.charAt(start)!=s.charAt(end))return false;
+			start++;
+			end--;
+		}
+		return true;
+	}
+	int getMinCutsUtil(String s,int start,int end,int[][] dp){
+		if(start>=end)return 0;
+		if(isPalindrome(s,start,end)==true)return dp[start][end]=0;
+		if(dp[start][end]!=-1)return dp[start][end];
+		int mini=Integer.MAX_VALUE;
+		for(int i=start;i<end;i++){
+			int res=Integer.MAX_VALUE;
+			if(isPalindrome(s,start,i)){
+				res=1+getMinCutsUtil(s,i+1,end,dp);
+			}
+			mini=Math.min(mini,res);
+		}
+		return dp[start][end]=mini;
+	}
     public int minCut(String s) {
-        char[] x = s.toCharArray();
-        int i=0, j=x.length-1;
-        for(int[] r:cache) Arrays.fill(r, -1);
-        return minCut(x, i, j);
-    }
-    private int minCut(char[] x, int i, int j){
-        if(i>=j) return 0;
-        if(cache[i][j]!=-1) return cache[i][j];
-        if(isPalindrome(x, i, j)) return 0;
-        int min = Integer.MAX_VALUE, left=0, right=0;
-        for(int k=i; k<j; k++){
-            // if(cache[i][k]!=-1) return cache[i][k];
-            // else {
-            //     left = minCut(x, i, k);
-            //     cache[i][k] = left;
-            // }
-            int temp = Integer.MAX_VALUE;
-            if(isPalindrome(x, i, k)){
-                temp = 1+minCut(x, k+1, j);
-            }
-            // if(cache[k+1][j]!=-1) return cache[k+1][j];
-            // else {
-            //     right = minCut(x, k+1, j);
-            //     cache[k+1][j] = right;
-            // }
-            // int temp = left + right + 1;
-            min = Math.min(min, temp);
-        }
-        return cache[i][j] = min;
-    }
-    private boolean isPalindrome(char[] x, int i, int j) {
-        if(i==j || i>j) return true;
-        while(i<j){
-            if(x[i]!=x[j]) return false;
-            i++; j--;
-        }
-        return true;
+        int[][] dp=new int[s.length()][s.length()];
+		for(int i=0;i<dp.length;i++){
+			for(int j=0;j<dp[0].length;j++){
+				dp[i][j]=-1;
+			}
+		}
+		return getMinCutsUtil(s,0,s.length()-1,dp);
     }
 }
