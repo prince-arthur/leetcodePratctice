@@ -16,24 +16,6 @@ class Solution {
             return 0;
         int min = Integer.MAX_VALUE, left = 0, right = 0;
         for(int k=i; k<j; k++){
-            // if(t[i][k]!=-1)
-            //     left = t[i][k];
-            // else{
-            //     left = solve(S,i,k,t);
-            //     t[i][k] = left;
-            // }
-
-            // if(t[k+1][j]!=-1)
-            //     right = t[k+1][j];
-            // else{
-            //     right = solve(S,k+1,j,t);
-            //     t[k+1][j] = right;
-            // }
-            
-            // int temp = left + right + 1;
-           
-            // if(temp<min)
-            //     min = temp;
              if(isPalindrome(S,i,k)){
                 int temp=1+solve(S,k+1,j,t);
                 min=Math.min(min,temp);
