@@ -7,7 +7,8 @@ class Solution {
                 curr = 0;
                 ans = i;
             }
-            if(++curr == k) break;
+            curr++;
+            if(curr== k) break;
         }
         return ans;
     }
