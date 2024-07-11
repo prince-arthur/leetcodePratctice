@@ -4,13 +4,12 @@ class Solution {
     }
 
     private int majorityElement(int[] nums, int n) {
-        Map<Integer, Integer> map = new HashMap<>();
+        int voter = 0, count = 0;
         for(int num: nums) {
-            map.put(num, map.getOrDefault(num, 0) + 1);
+            if(count == 0) voter = num;
+            if(voter == num) count++;
+            else count--;
         }
-        for(int i: map.keySet()) {
-            if(map.get(i) > n/2) return i;
-        }
-        return 0;
+        return voter;
     }
 }
