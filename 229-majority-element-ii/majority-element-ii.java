@@ -25,9 +25,9 @@ class Solution {
             if(i==one) countOne++;
             if(i==two) countTwo++;
         }
-        // int threshold = nums.length/3;
-        if(countOne > (nums.length/3)) list.add(one);
-        if(countTwo > (nums.length/3)) list.add(two);
+        int threshold = nums.length/3;
+        if(countOne > threshold) list.add(one);
+        if(countTwo > threshold) list.add(two);
         return list;
     }
 }
