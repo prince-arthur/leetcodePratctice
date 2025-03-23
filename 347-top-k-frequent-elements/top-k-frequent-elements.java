@@ -1,26 +1,30 @@
 class Solution {
     public int[] topKFrequent(int[] nums, int k) {
-        Map<Integer, Integer> map = new HashMap<>();
-        List<Integer>[] bucket = new List[nums.length+1];
-        for(int num : nums) {
-            map.put(num, map.getOrDefault(num, 0) + 1);
+        Map<Integer, Integer> freqMap = new HashMap<>();
+        for(int num: nums){
+            freqMap.merge(num, 1, Integer::sum);
         }
-        for(int key: map.keySet()) {
-            int frequency = map.get(key);
-            if(bucket[frequency] == null) {
-                bucket[frequency] = new ArrayList<>();
+        List<Integer>[] buckets = new List[nums.length+1];
+        for(int i = 0; i < buckets.length; i++) {
+            buckets[i] = new ArrayList<>();
+        }
+        for(int key: freqMap.keySet()) {
+            int frequency = freqMap.get(key);
+            if(buckets[frequency] == null) {
+                buckets[frequency] = new ArrayList<>();
             }
-            bucket[frequency].add(key);
+            buckets[frequency].add(key);
         }
-        int[] res = new int[k];
-        int counter = 0;
-        for(int i = bucket.length-1; i>=0; i--) {
-            if(counter < k && bucket[i]!=null){
-                for(Integer pos: bucket[i]) {
-                    res[counter++] = pos;
+        List<Integer> result = new ArrayList<>();
+        for(int freq = nums.length; freq>=0; freq--){
+            for(int num: buckets[freq]){
+                result.add(num);
+
+                if(result.size() == k){
+                    return result.stream().mapToInt(Integer::intValue).toArray();
                 }
             }
         }
-        return res;
+        return result.stream().mapToInt(Integer::intValue).toArray();
 	}
 }
