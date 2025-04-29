@@ -5,6 +5,23 @@ class Solution {
         return longestConsecutive(nums, n);
     }
 
+    private int longestConsecutive(int[] nums, int n) {
+        int max = n == 0 ? 0 : 1;
+        int count = 1;
+        Arrays.sort(nums);
+        for(int i = 1; i < n; i++) {
+            if(nums[i] == nums[i-1]) continue;
+            if(nums[i] == nums[i-1] + 1) {
+                count++;
+                max = count > max ? count : max;
+            } else {
+                count = 1;
+            }
+        }
+        return max;
+    }
+
+    /* 
     private int longestConsecutive(int[] nums, int n){
         Set<Integer> set = new HashSet<>();
         for(int i: nums) {
@@ -24,4 +41,5 @@ class Solution {
         }
         return longest;
     }
+    */
 }
