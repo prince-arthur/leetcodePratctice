@@ -10,9 +10,7 @@ class Solution {
             while(left < right) {
                 int target = nums[left] + nums[right] + nums[i];
                 if(target == 0) {
-                    List<Integer> tempAns = Arrays.asList(nums[left], nums[right], nums[i]);
-                    list.add(tempAns);
-
+                    list.add(Arrays.asList(nums[left], nums[right], nums[i]));
                     while(left < right && nums[left] == nums[left + 1]) left++;
                     while(left < right && nums[right] == nums[right - 1]) right--;
                     left++;
