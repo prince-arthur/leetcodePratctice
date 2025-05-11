@@ -7,6 +7,6 @@ class Solution {
     }
 
     private boolean isOdd(int n){
-        return n%2==1;
+        return (n & 1) != 0;
     }
 }
